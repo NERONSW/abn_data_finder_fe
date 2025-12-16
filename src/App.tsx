@@ -1,14 +1,10 @@
-import { useState } from "react";
-
-import TableLayout from "./pages/TableLayout";
+import MainLayout from "./pages/MainLayout";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <TableLayout />
+      <div className="bg-gray-50">
+        <MainLayout />
       </div>
     </>
   );

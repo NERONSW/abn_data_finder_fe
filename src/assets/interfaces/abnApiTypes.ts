@@ -18,6 +18,7 @@ export interface ABN {
 export interface FetchABNParams {
   page?: number;
   limit?: number;
+  abn?: string;
   state?: string;
   postcode?: string;
   entity_type?: string;

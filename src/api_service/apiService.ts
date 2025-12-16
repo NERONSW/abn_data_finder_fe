@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { ABN, FetchABNParams } from "./abnTypes.ts";
+import type { ABN, FetchABNParams } from "../assets/interfaces/abnApiTypes.ts";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
