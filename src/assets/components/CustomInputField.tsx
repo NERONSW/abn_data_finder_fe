@@ -1,3 +1,4 @@
+import { Tooltip } from "antd";
 import { InfoIcon } from "../icons/Icons";
 
 type InputType = "text" | "number";
@@ -8,6 +9,7 @@ interface CustomInputProps {
   type?: InputType;
   placeholder?: string;
   info?: boolean;
+  info_data?: string;
   onChange: (value: string) => void;
 }
 
@@ -17,13 +19,20 @@ const CustomInputField = ({
   type = "text",
   placeholder,
   info,
+  info_data,
   onChange,
 }: CustomInputProps) => {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex gap-2 items-center justify-start">
         <span className="text-[12px] font-semibold">{label}</span>
-        {info ? <InfoIcon size={14} /> : null}
+        {info ? (
+          <Tooltip placement="rightTop" title={info_data}>
+            <span className="cursor-pointer inline-flex">
+              <InfoIcon size={14} />
+            </span>
+          </Tooltip>
+        ) : null}
       </div>
 
       <input

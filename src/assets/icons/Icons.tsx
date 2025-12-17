@@ -58,3 +58,31 @@ export const InfoIcon = ({
     <path d="M12 8h.01" />
   </svg>
 );
+
+export const ListChevronsIcon = ({
+  size = 20,
+  color = "currentColor",
+  className,
+}: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={
+      className ||
+      `${"lucide lucide lucide-list-chevrons-down-up-icon lucide-list-chevrons-down-up"}`
+    }
+  >
+    <path d="M3 5h8" />
+    <path d="M3 12h8" />
+    <path d="M3 19h8" />
+    <path d="m15 5 3 3 3-3" />
+    <path d="m15 19 3-3 3 3" />
+  </svg>
+);

@@ -3,6 +3,7 @@ import type { FetchABNParams } from "./abnApiTypes";
 export interface ABNFilter {
   abn?: string;
   entity_name?: string;
+  name_type?: string;
   other_entities?: string;
   entity_type?: string;
   abn_status?: string;
@@ -21,6 +22,7 @@ export const mapABNFilterToParams = (filter: ABNFilter): FetchABNParams => {
 
   // Simple string fields
   if (filter.abn) params.abn = filter.abn;
+  if (filter.name_type) params.name_type = filter.name_type;
   if (filter.state) params.state = filter.state;
   if (filter.postcode) params.postcode = filter.postcode;
   if (filter.entity_type) params.entity_type = filter.entity_type;

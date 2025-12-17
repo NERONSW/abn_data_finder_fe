@@ -2,6 +2,7 @@
 export const gstStatusOptions = [
   { label: "Active", value: "ACT" },
   { label: "Cancelled", value: "CAN" },
+  { label: "Non", value: "NON" },
 ];
 
 //To use in table

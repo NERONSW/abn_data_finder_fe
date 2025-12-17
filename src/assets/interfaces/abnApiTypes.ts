@@ -1,8 +1,19 @@
+interface otherEntities {
+  name: string;
+  type: string;
+}
+
+interface IndividualNameParts {
+  title?: string;
+  given_names: string[];
+  family_name: string;
+}
 export interface ABN {
   _id: string;
   abn: string;
   entity_name: string;
-  other_entities: string[];
+  name_type: string;
+  other_entities?: otherEntities[];
   state: string;
   postcode?: string;
   entity_type: string;
@@ -13,12 +24,14 @@ export interface ABN {
   asic_number?: string;
   replaced: "Y" | "N";
   record_last_updated: string;
+  individual_parts?: IndividualNameParts;
 }
 
 export interface FetchABNParams {
   page?: number;
   limit?: number;
   abn?: string;
+  name_type?: string;
   state?: string;
   postcode?: string;
   entity_type?: string;

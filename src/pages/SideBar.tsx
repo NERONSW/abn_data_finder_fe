@@ -10,6 +10,8 @@ import { gstStatusOptions } from "../assets/selector_data/gstStatusOptions ";
 import { stateOptions } from "../assets/selector_data/stateOptions";
 import { replacedOptions } from "../assets/selector_data/replacedOptions";
 import dayjs from "dayjs";
+import { nameTypeOptions } from "../assets/selector_data/nameTypeOptions";
+import toast from "react-hot-toast";
 
 interface SideBarProps {
   filters: ABNFilter;
@@ -19,11 +21,9 @@ interface SideBarProps {
 
 const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
   const [openSibebar, setOpenSibebar] = useState(false);
-
   const { RangePicker } = DatePicker;
 
-  console.log("filters :", filters);
-
+  //Helper function that used to set data or delete the key if empty
   const setOrDeleteFilter = <T extends Record<string, any>>(
     prev: T,
     key: keyof T,
@@ -43,6 +43,18 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
     }
 
     return next;
+  };
+
+  //Validate ABN length
+  const isValidABN = (value?: string) => {
+    if (!value) return true; // empty allowed
+    return /^\d{11}$/.test(value);
+  };
+
+  //Validate ASIC length
+  const isValidASIC = (value?: string) => {
+    if (!value) return true; // empty allowed
+    return /^\d{9}$/.test(value);
   };
 
   return (
@@ -66,6 +78,7 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             <CustomInputField
               label="Entity Name"
               type="text"
+              placeholder="Please type"
               value={filters.entity_name}
               onChange={(value) =>
                 onFiltersChange((prev) =>
@@ -77,7 +90,10 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             <CustomInputField
               label="ABN"
               type="number"
+              placeholder="Please type"
               value={filters.abn}
+              info={true}
+              info_data={"An ABN must be exactly 11 digits long."}
               onChange={(value) =>
                 onFiltersChange((prev) => setOrDeleteFilter(prev, "abn", value))
               }
@@ -86,7 +102,10 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             <CustomInputField
               label="Asic Number"
               type="number"
+              placeholder="Please type"
               value={filters.asic_number}
+              info={true}
+              info_data={"An Asic number must be exactly 11 digits long."}
               onChange={(value) =>
                 onFiltersChange((prev) =>
                   setOrDeleteFilter(prev, "asic_number", value)
@@ -115,6 +134,25 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
                 options={entityTypeOptions}
               />
             </div>
+
+            <div className="flex flex-col">
+              <span className=" text-[12px] font-semibold">
+                Entity Name Type
+              </span>
+              <Select
+                allowClear
+                style={{ width: "100%" }}
+                value={filters.name_type}
+                placeholder="Please select"
+                onChange={(value?: string) => {
+                  onFiltersChange((prev) =>
+                    setOrDeleteFilter(prev, "name_type", value)
+                  );
+                }}
+                options={nameTypeOptions}
+              />
+            </div>
+
             <div className="flex flex-col">
               <span className=" text-[12px] font-semibold">ABN Status</span>
               <Select
@@ -286,6 +324,16 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
           className="mt-auto py-2 px-4 border rounded-sm bg-blue-600 text-white w-full cursor-pointer hover:bg-blue-500 disabled:cursor-not-allowed"
           disabled={Object.keys(filters).length === 0}
           onClick={() => {
+            if (!isValidABN(filters.abn)) {
+              toast.error("ABN must be exactly 11 digits");
+              return;
+            }
+
+            if (!isValidASIC(filters.asic_number)) {
+              toast.error("ASIC number must be exactly 9 digits");
+              return;
+            }
+
             onSearch(filters);
           }}
         >
