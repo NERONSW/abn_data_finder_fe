@@ -84,7 +84,7 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
         <div className="overflow-auto custom-scrollbar mb-2">
           <div className="flex flex-col gap-2">
             <CustomInputField
-              label="Entity Name"
+              label="Name"
               type="text"
               placeholder="Please type"
               value={filters.entity_name}
@@ -122,6 +122,22 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             />
 
             <div className="flex flex-col">
+              <span className=" text-[12px] font-semibold">Name Type</span>
+              <Select
+                allowClear
+                style={{ width: "100%" }}
+                value={filters.name_type}
+                placeholder="Please select"
+                onChange={(value?: string) => {
+                  onFiltersChange((prev) =>
+                    setOrDeleteFilter(prev, "name_type", value)
+                  );
+                }}
+                options={nameTypeOptions}
+              />
+            </div>
+
+            <div className="flex flex-col">
               <span className=" text-[12px] font-semibold">Entity Type</span>
               <Select
                 mode="multiple"
@@ -140,24 +156,6 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
                   );
                 }}
                 options={entityTypeOptions}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <span className=" text-[12px] font-semibold">
-                Entity Name Type
-              </span>
-              <Select
-                allowClear
-                style={{ width: "100%" }}
-                value={filters.name_type}
-                placeholder="Please select"
-                onChange={(value?: string) => {
-                  onFiltersChange((prev) =>
-                    setOrDeleteFilter(prev, "name_type", value)
-                  );
-                }}
-                options={nameTypeOptions}
               />
             </div>
 
