@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="bg-gray-50">
+      <div className="bg-gray-100">
         <MainLayout />
       </div>
     </>

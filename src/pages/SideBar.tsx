@@ -59,8 +59,10 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen z-50 bg-white border-r border-r-gray-400 shadow-2xl transition-transform duration-300 ease-in-out 
-          ${openSibebar ? "translate-x-0" : "-translate-x-full"} w-70`}
+      className={`fixed top-0 left-0 h-screen z-50 bg-white border-r border-r-gray-400 shadow-2xl rounded-r-xl
+        transition-transform duration-300 ease-in-out ${
+          openSibebar ? "translate-x-0" : "-translate-x-full"
+        } w-70`}
     >
       <span
         className="absolute top-[50%] -right-10 border border-gray-400 p-2 cursor-pointer rounded-sm bg-white text-blue-600"
@@ -72,7 +74,7 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
       </span>
 
       <div className="max-h-screen py-4 pl-2 pr-1 flex flex-col gap-2">
-        <span className=" mb-2">Filter Options</span>
+        <span className="mb-2 text-lg font-bold">Filter Options</span>
         <div className="overflow-auto custom-scrollbar mb-2">
           <div className="flex flex-col gap-2">
             <CustomInputField
@@ -229,6 +231,9 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
               </span>
               <RangePicker
                 format="YYYY-MM-DD"
+                disabledDate={(current) => {
+                  return current && current > dayjs().endOf("day");
+                }}
                 value={
                   filters.abn_status_from_date?.from &&
                   filters.abn_status_from_date?.to
@@ -261,6 +266,9 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
               </span>
               <RangePicker
                 format="YYYY-MM-DD"
+                disabledDate={(current) => {
+                  return current && current > dayjs().endOf("day");
+                }}
                 value={
                   filters.gst_status_from_date?.from &&
                   filters.gst_status_from_date?.to
@@ -293,6 +301,9 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
               </span>
               <RangePicker
                 format="YYYY-MM-DD"
+                disabledDate={(current) => {
+                  return current && current > dayjs().endOf("day");
+                }}
                 value={
                   filters.record_last_updated?.from &&
                   filters.record_last_updated?.to

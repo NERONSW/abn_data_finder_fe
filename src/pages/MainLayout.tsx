@@ -182,7 +182,7 @@ const MainLayout = () => {
         ),
     },
     {
-      title: "Technical",
+      title: "Metadata",
       key: "technical",
       width: 120,
       render: (_, record) => (
@@ -279,7 +279,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className="p-4 relative">
+    <div className="p-6 relative">
       {/* Sidebar */}
       <SideBar
         filters={filters}
@@ -288,7 +288,10 @@ const MainLayout = () => {
       />
 
       {/* Table Component */}
-      <div className=" border border-gray-300 rounded-sm w-full shadow-2xl">
+      <div className=" border border-gray-300 rounded-sm w-full shadow-2xl bg-white">
+        <span className="w-full text-center text-2xl p-4 block border-b border-b-gray-300 font-bold">
+          ABN Data Finder
+        </span>
         <Table<ABNRow>
           rowKey="_id"
           columns={columns}
