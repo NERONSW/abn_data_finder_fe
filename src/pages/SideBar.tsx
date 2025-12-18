@@ -57,6 +57,12 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
     return /^\d{9}$/.test(value);
   };
 
+  //Validate ASIC length
+  const isValidPostCode = (value?: string) => {
+    if (!value) return true; // empty allowed
+    return /^\d{4}$/.test(value);
+  };
+
   return (
     <div
       className={`fixed top-0 left-0 h-screen z-50 bg-white border-r border-r-gray-400 shadow-2xl rounded-r-xl
@@ -78,7 +84,7 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
         <div className="overflow-auto custom-scrollbar mb-2">
           <div className="flex flex-col gap-2">
             <CustomInputField
-              label="Entity Name"
+              label="Name"
               type="text"
               placeholder="Please type"
               value={filters.entity_name}
@@ -116,6 +122,22 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             />
 
             <div className="flex flex-col">
+              <span className=" text-[12px] font-semibold">Name Type</span>
+              <Select
+                allowClear
+                style={{ width: "100%" }}
+                value={filters.name_type}
+                placeholder="Please select"
+                onChange={(value?: string) => {
+                  onFiltersChange((prev) =>
+                    setOrDeleteFilter(prev, "name_type", value)
+                  );
+                }}
+                options={nameTypeOptions}
+              />
+            </div>
+
+            <div className="flex flex-col">
               <span className=" text-[12px] font-semibold">Entity Type</span>
               <Select
                 mode="multiple"
@@ -134,24 +156,6 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
                   );
                 }}
                 options={entityTypeOptions}
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <span className=" text-[12px] font-semibold">
-                Entity Name Type
-              </span>
-              <Select
-                allowClear
-                style={{ width: "100%" }}
-                value={filters.name_type}
-                placeholder="Please select"
-                onChange={(value?: string) => {
-                  onFiltersChange((prev) =>
-                    setOrDeleteFilter(prev, "name_type", value)
-                  );
-                }}
-                options={nameTypeOptions}
               />
             </div>
 
@@ -188,22 +192,6 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
             </div>
 
             <div className="flex flex-col">
-              <span className=" text-[12px] font-semibold">Replaced</span>
-              <Select
-                allowClear
-                style={{ width: "100%" }}
-                value={filters.replaced}
-                placeholder="Please select"
-                onChange={(value?: "Y" | "N") => {
-                  onFiltersChange((prev) =>
-                    setOrDeleteFilter(prev, "replaced", value)
-                  );
-                }}
-                options={replacedOptions}
-              />
-            </div>
-
-            <div className="flex flex-col">
               <span className=" text-[12px] font-semibold">State</span>
               <Select
                 mode="multiple"
@@ -222,6 +210,36 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
                   );
                 }}
                 options={stateOptions}
+              />
+            </div>
+
+            <CustomInputField
+              label="Postcode"
+              type="number"
+              placeholder="Please type"
+              value={filters.postcode}
+              info={true}
+              info_data={"Post code must be exactly 4 digits long."}
+              onChange={(value) =>
+                onFiltersChange((prev) =>
+                  setOrDeleteFilter(prev, "postcode", value)
+                )
+              }
+            />
+
+            <div className="flex flex-col">
+              <span className=" text-[12px] font-semibold">Replaced</span>
+              <Select
+                allowClear
+                style={{ width: "100%" }}
+                value={filters.replaced}
+                placeholder="Please select"
+                onChange={(value?: "Y" | "N") => {
+                  onFiltersChange((prev) =>
+                    setOrDeleteFilter(prev, "replaced", value)
+                  );
+                }}
+                options={replacedOptions}
               />
             </div>
 
@@ -342,6 +360,11 @@ const SideBar = ({ filters, onFiltersChange, onSearch }: SideBarProps) => {
 
             if (!isValidASIC(filters.asic_number)) {
               toast.error("ASIC number must be exactly 9 digits");
+              return;
+            }
+
+            if (!isValidPostCode(filters.postcode)) {
+              toast.error("Post code must be exactly 4 digits");
               return;
             }
 
