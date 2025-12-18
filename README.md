@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# 🔍 ABN Data Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive search application designed to fetch, normalize, and manage Australian Business Number (ABN) data. This project features a high-performance backend with MongoDB aggregation pipelines and a responsive, modern frontend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🚀 Live Demo
 
-## React Compiler
+- **Frontend:** [https://abn-data-finder-fe.vercel.app/](https://abn-data-finder-fe.vercel.app/)
+- **Backend API:** [https://abn-data-finder-be.onrender.com](https://abn-data-finder-be.onrender.com)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> [!IMPORTANT] > **Performance Note:** This application is hosted on **Vercel (Frontend)** and **Render (Backend)**. Due to Render's free tier "spin-down" policy, the backend may take **30–60 seconds** to wake up during the initial request. Please be patient while the data loads for the first time!
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 🛠 Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+#### **Frontend**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Framework:** React 18 with TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **Deployment:** Vercel
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+#### **Backend**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Runtime:** Node.js with TypeScript
+- **Framework:** Express.js
+- **Database:** MongoDB Atlas
+- **Deployment:** Render
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 📖 Features
+
+- **Comprehensive Search:** Search through large datasets of ABN records efficiently.
+- **Data Normalization:** Automated backend pipelines to normalize entity names and convert date formats using MongoDB Aggregation.
+- **Type Safety:** End-to-end TypeScript implementation for both Frontend and Backend.
+- **Responsive Design:** Fully optimized for mobile, tablet, and desktop views.
+
+---
+
+### 📂 Repository Links
+
+- **Frontend Repo:** [https://github.com/NERONSW/abn_data_finder_fe](https://github.com/NERONSW/abn_data_finder_fe)
+- **Backend Repo:** [https://github.com/NERONSW/abn_data_finder_be](https://github.com/NERONSW/abn_data_finder_be)
